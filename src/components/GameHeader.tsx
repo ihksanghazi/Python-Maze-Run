@@ -37,7 +37,7 @@ export default function GameHeader({
       <div className="flex items-center gap-3">
         <h1 className="text-xl font-bold tracking-tight md:text-2xl flex items-center gap-2">
           <img src="./assets/icon.png" alt="Logo" className="h-6 w-6 md:h-8 md:w-8" />
-          <span>Logic Labyrinth</span>
+          <span>Python Maze Run</span>
         </h1>
       </div>
 
