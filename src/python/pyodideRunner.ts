@@ -2,13 +2,20 @@ import type { Direction } from "@/game/gameEngine";
 import { validateMove } from "@/game/gameEngine";
 import type { Level } from "@/game/levels";
 
+interface PyodideInstance {
+  globals: {
+    set: (name: string, value: unknown) => void;
+  };
+  runPythonAsync: (code: string) => Promise<unknown>;
+}
+
 declare global {
   interface Window {
-    loadPyodide: (config?: { indexURL?: string }) => Promise<any>;
+    loadPyodide: (config?: { indexURL?: string }) => Promise<PyodideInstance>;
   }
 }
 
-let pyodide: any = null;
+let pyodide: PyodideInstance | null = null;
 let sandboxInitialized = false;
 
 export async function loadPyodideInstance(): Promise<void> {
@@ -74,8 +81,8 @@ builtins.__import__ = _safe_import
 
   try {
     await pyodide.runPythonAsync(code);
-  } catch (err: any) {
-    const msg = err.message || String(err);
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
     const lines = msg.split("\n").filter((l: string) => l.trim());
     const lastLine = lines[lines.length - 1] || msg;
     throw new Error(lastLine);

@@ -35,18 +35,20 @@ export default function Index() {
   const level = levels[levelIndex];
 
   // Get the active maze config based on phase
-  const activeMaze = phase === "demo"
+  const activeMaze = useMemo(() => phase === "demo"
     ? { gridSize: level.gridSize, start: level.start, goal: level.goal, walls: level.walls, description: level.description }
-    : { gridSize: level.challenge.gridSize, start: level.challenge.start, goal: level.challenge.goal, walls: level.challenge.walls, description: level.challenge.description };
+    : { gridSize: level.challenge.gridSize, start: level.challenge.start, goal: level.challenge.goal, walls: level.challenge.walls, description: level.challenge.description },
+    [phase, level]
+  );
 
   // Build a level-like object for Maze/gameEngine
-  const activeLevelConfig = {
+  const activeLevelConfig = useMemo(() => ({
     ...level,
     gridSize: activeMaze.gridSize,
     start: activeMaze.start,
     goal: activeMaze.goal,
     walls: activeMaze.walls,
-  };
+  }), [level, activeMaze]);
 
   useEffect(() => {
     loadPyodideInstance()
@@ -177,8 +179,9 @@ export default function Index() {
           return;
         }
         await animateMoves(moves);
-      } catch (err: any) {
-        setError(err.message || "Terjadi kesalahan saat menjalankan kode Python.");
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : "Terjadi kesalahan saat menjalankan kode Python.";
+        setError(msg);
         toast.error("Error Python!");
       }
       setIsRunning(false);
