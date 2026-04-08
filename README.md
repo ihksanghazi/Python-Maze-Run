@@ -1,6 +1,6 @@
 # Python Maze Run 🐍🎮
 
-Sebuah permainan maze interaktif di mana Anda mengontrol karakter menggunakan kode Python nyata! Belajar dasar-dasar pemrograman Python sambil menyelesaikan tantangan labirin yang seru.
+Sebuah permainan Labirin di mana Anda mengontrol karakter menggunakan kode Python! Belajar dasar-dasar pemrograman Python sambil menyelesaikan tantangan labirin.
 
 ## ✨ Fitur Utama
 - **Python-Powered**: Jalankan kode Python sungguhan langsung di browser menggunakan Pyodide.
