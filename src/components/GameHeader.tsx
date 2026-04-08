@@ -35,8 +35,9 @@ export default function GameHeader({
   return (
     <header className="flex flex-wrap items-center justify-between gap-3 border-b bg-card px-4 py-3 md:px-6">
       <div className="flex items-center gap-3">
-        <h1 className="text-xl font-bold tracking-tight md:text-2xl">
-          <span className="text-primary">🧩</span> Logic Labyrinth
+        <h1 className="text-xl font-bold tracking-tight md:text-2xl flex items-center gap-2">
+          <img src="./assets/icon.png" alt="Logo" className="h-6 w-6 md:h-8 md:w-8" />
+          <span>Logic Labyrinth</span>
         </h1>
       </div>
 
